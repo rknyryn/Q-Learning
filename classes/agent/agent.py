@@ -1,3 +1,4 @@
+from entities.statistics import Statistics
 from random import choice
 
 class Agent:
@@ -14,6 +15,8 @@ class Agent:
     path = []
     finished_path = []
     goal_path_count = 0
+    step_count = 0
+    total_q_value = 0
 
     def __init__(self, matrix_map, matrix_r, matrix_q, learning_rate, start_point, goal_point):
         self.matrix_map = matrix_map
@@ -31,6 +34,7 @@ class Agent:
         else:
             q_value = -10
             self.path.clear()
+        self.total_q_value += r_value + q_value
         return r_value + q_value
 
     def choose_action(self, agent_point):
@@ -62,6 +66,9 @@ class Agent:
 
     def move_agent(self, move_point):
         if self.matrix_map[move_point[0]][move_point[1]] == 100:
+            Statistics.add(self.total_q_value,self.step_count + 1)
+            self.step_count = 0
+            self.total_q_value = 0
             self.path.append(self.goal_point)
             self.finished_path = self.path.copy()
             self.path.clear()
@@ -69,11 +76,15 @@ class Agent:
             self.set_agent_point(self.start_point)
 
         elif self.matrix_map[move_point[0]][move_point[1]] == 1:
+            self.step_count = 0
+            self.total_q_value = 0
             self.path.clear()
             self.set_agent_point(self.start_point)
         else:
+            self.step_count =  self.step_count + 1
             self.path.append(move_point)
             self.set_agent_point(move_point)
+
 
     def set_agent_point(self, move_point):
         self.current_location = move_point

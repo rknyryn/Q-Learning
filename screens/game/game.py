@@ -1,3 +1,5 @@
+from classes.agent.agent import Agent
+from entities.statistics import Statistics
 from entities.screen import Screen
 from classes.agent.agent_on_screen import Agent_On_Screen
 from classes.file_operation.file_operation import File_Operation
@@ -92,6 +94,9 @@ class Game:
                     my_agent.move_agent(move_point)
                 else:
                     my_agent.set_agent_point(my_agent.start_point)
+                    my_agent.step_count = 0
+                    my_agent.total_q_value = 0
+                    
 
             pygame.event.pump()
             keys = pygame.key.get_pressed()

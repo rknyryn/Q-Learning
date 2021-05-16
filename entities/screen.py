@@ -8,7 +8,7 @@ class Screen:
 
     square_size = 19
 
-    window_height = 850
+    window_height = 650
     window_width = 650
 
     def resize(row, column):
@@ -17,9 +17,9 @@ class Screen:
 
     def resize_square(row, column):
         if row < column:
-            Screen.square_size = (int)((900)/column)
+            Screen.square_size = (int)((650)/column)
         else:
-            Screen.square_size = (int)((900)/row)
+            Screen.square_size = (int)((650)/row)
 
     def resize_window(row, column):
         Screen.window_height = Screen.square_size * row
@@ -27,4 +27,4 @@ class Screen:
 
     def reset_window_size():
         Screen.window_width = 650
-        Screen.window_height = 850
+        Screen.window_height = 650
