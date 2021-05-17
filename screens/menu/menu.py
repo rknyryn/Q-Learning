@@ -33,9 +33,10 @@ class Menu:
     
     def set_matrix_x(value):
         Screen.matrix_x_y[0] = value
-
-    def set_matrix_y(value):
         Screen.matrix_x_y[1] = value
+
+    # def set_matrix_y(value):
+    #     Screen.matrix_x_y[1] = value
 
     def set_matrix_hurdle_rate(value):
         Screen.hurdle_rate = value
@@ -61,9 +62,9 @@ class Menu:
     def start_menu(self):
         self.menu.mainloop(self.surface)
 
-    menu.add.label('Oyun Alanı')
-    menu.add.text_input('X: ', input_type=pygame_menu.locals.INPUT_INT, default=Screen.matrix_x_y[0], onchange=set_matrix_x)
-    menu.add.text_input('Y: ', input_type=pygame_menu.locals.INPUT_INT, default=Screen.matrix_x_y[1], onchange=set_matrix_y)
+    # menu.add.label('Oyun Alanı')
+    menu.add.text_input('Oyun Alanı: ', input_type=pygame_menu.locals.INPUT_INT, default=Screen.matrix_x_y[0], onchange=set_matrix_x)
+    # menu.add.text_input('Y: ', input_type=pygame_menu.locals.INPUT_INT, default=Screen.matrix_x_y[1], onchange=set_matrix_y)
     
     menu.add.text_input('Engel Oranı(10 üzerinden): ', input_type=pygame_menu.locals.INPUT_INT, default=Screen.hurdle_rate, onchange=set_matrix_hurdle_rate)
     menu.add.text_input('Öğrenme Oranı: ', input_type=pygame_menu.locals.INPUT_FLOAT, default=Screen.learning_rate, onchange=set_learning_rate)
