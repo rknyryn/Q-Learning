@@ -62,7 +62,7 @@ class Menu:
     menu.add.text_input('X: ', input_type=pygame_menu.locals.INPUT_INT, default=10, onchange=set_matrix_x)
     menu.add.text_input('Y: ', input_type=pygame_menu.locals.INPUT_INT, default=10, onchange=set_matrix_y)
     
-    menu.add.text_input('Engel Olma Oranı: ', input_type=pygame_menu.locals.INPUT_INT, default=1, onchange=set_matrix_hurdle_rate)
+    menu.add.text_input('Engel Oranı(10 üzerinden): ', input_type=pygame_menu.locals.INPUT_INT, default=1, onchange=set_matrix_hurdle_rate)
     menu.add.text_input('Öğrenme Oranı: ', input_type=pygame_menu.locals.INPUT_FLOAT, default=0.8, onchange=set_learning_rate)
     
     menu.add.label('Ajanın Konumu')

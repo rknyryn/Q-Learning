@@ -18,6 +18,7 @@ class Game:
         self._block_surf = None
         self._goal_surf = None
         self._trace_surf = None
+        self._search_surf = None
         self.maze = maze
  
     def on_init(self):
@@ -26,6 +27,7 @@ class Game:
         pygame.display.set_caption('Q-Learning')
         self._running = True
 
+        self._search_surf =pygame.image.load('./images/search.png') 
         self._trace_surf = pygame.image.load('./images/trace.png')
         self._agent_surf = pygame.image.load("./images/agent.png")
         self._block_surf = pygame.image.load("./images/block.png")
@@ -35,6 +37,7 @@ class Game:
         self._agent_surf = pygame.transform.scale(self._agent_surf, (Screen.square_size, Screen.square_size))
         self._block_surf = pygame.transform.scale(self._block_surf, (Screen.square_size, Screen.square_size))
         self._goal_surf = pygame.transform.scale(self._goal_surf, (Screen.square_size, Screen.square_size))
+        self._search_surf = pygame.transform.scale(self._search_surf, (Screen.square_size, Screen.square_size))
  
     def on_event(self, event):
         if event.type == QUIT:
@@ -44,7 +47,7 @@ class Game:
         pass
     
     def on_render_finished(self, my_agent, my_matrix):
-        self._display_surf.fill((20,20,20))
+        self._display_surf.fill((30,30,30))
         self.maze.draw(self._display_surf, self._block_surf, self._goal_surf, my_agent.goal_point)
         self._display_surf.blit(self._agent_surf,(self._agent.point[0], self._agent.point[1]))
 
@@ -60,14 +63,14 @@ class Game:
         fo.OutputFile(my_matrix.matrix_map, my_agent.start_point, my_agent.goal_point, my_agent.finished_path)
     
     def on_render(self, my_agent):
-        self._display_surf.fill((20,20,20))
+        self._display_surf.fill((30,30,30))
         self.maze.draw(self._display_surf, self._block_surf, self._goal_surf, my_agent.goal_point)
         self._display_surf.blit(self._agent_surf,(self._agent.point[0], self._agent.point[1]))
 
         if my_agent:
             self._display_surf.blit(self._agent_surf,(my_agent.start_point[1]*Screen.square_size, my_agent.start_point[0]*Screen.square_size))
             for i in my_agent.path:
-                self._display_surf.blit(self._trace_surf,(i[1]*Screen.square_size, i[0]*Screen.square_size))
+                self._display_surf.blit(self._search_surf,(i[1]*Screen.square_size, i[0]*Screen.square_size))
         pygame.display.flip()
  
     def on_cleanup(self):
