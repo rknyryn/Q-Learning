@@ -18,7 +18,6 @@ class Menu:
 
     def start_the_game():
         my_matrix = Matrix(Screen.matrix_x_y[0], Screen.matrix_x_y[1], Screen.agent_x_y, Screen.goal_x_y, Screen.hurdle_rate)
-        my_matrix.reset_matrix()
         my_agent = Agent(my_matrix.matrix_map, my_matrix.matrix_r,
                 my_matrix.matrix_q, Screen.learning_rate,
                 my_matrix.start_point, my_matrix.goal_point)

@@ -47,21 +47,21 @@ class Agent:
 
     def move_point(self, action):
         if action == 0:
-            return [self.current_location[0]-1, self.current_location[1]]
+            return [self.current_location[0]-1, self.current_location[1], 0]
         elif action == 1:
-            return [self.current_location[0]-1, self.current_location[1]+1]
+            return [self.current_location[0]-1, self.current_location[1]+1, 1]
         elif action == 2:
-            return [self.current_location[0], self.current_location[1]+1]
+            return [self.current_location[0], self.current_location[1]+1, 2]
         elif action == 3:
-            return [self.current_location[0]+1, self.current_location[1]+1]
+            return [self.current_location[0]+1, self.current_location[1]+1, 3]
         elif action == 4:
-            return [self.current_location[0]+1, self.current_location[1]]
+            return [self.current_location[0]+1, self.current_location[1], 4]
         elif action == 5:
-            return [self.current_location[0]+1, self.current_location[1]-1]
+            return [self.current_location[0]+1, self.current_location[1]-1, 5]
         elif action == 6:
-            return [self.current_location[0], self.current_location[1]-1]
+            return [self.current_location[0], self.current_location[1]-1, 6]
         elif action == 7:
-            return [self.current_location[0]-1, self.current_location[1]-1]
+            return [self.current_location[0]-1, self.current_location[1]-1, 7]
         return
 
     def move_agent(self, move_point):
@@ -69,7 +69,7 @@ class Agent:
             Statistics.add(self.total_q_value,self.step_count + 1)
             self.step_count = 0
             self.total_q_value = 0
-            self.path.append(self.goal_point)
+            self.path.append(move_point)
             self.finished_path = self.path.copy()
             self.path.clear()
             self.goal_path_count += 1

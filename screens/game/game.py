@@ -17,7 +17,7 @@ class Game:
 
         self._block_surf = None
         self._goal_surf = None
-        self._trace_surf = None
+        self._trace_surf = []
         self._search_surf = None
         self.maze = maze
  
@@ -28,12 +28,17 @@ class Game:
         self._running = True
 
         self._search_surf =pygame.image.load('./images/search.png') 
-        self._trace_surf = pygame.image.load('./images/trace.png')
+        # self._trace_surf = pygame.image.load('./images/trace.png')
         self._agent_surf = pygame.image.load("./images/agent.png")
         self._block_surf = pygame.image.load("./images/block.png")
         self._goal_surf = pygame.image.load("./images/goal.png")
 
-        self._trace_surf = pygame.transform.scale(self._trace_surf, (Screen.square_size, Screen.square_size))
+        for i in range(8):
+            image = pygame.image.load("./images/trace-%s.png"% i)
+            image = pygame.transform.scale(image, (Screen.square_size, Screen.square_size))
+            self._trace_surf.append(image)
+
+        # self._trace_surf = pygame.transform.scale(self._trace_surf, (Screen.square_size, Screen.square_size))
         self._agent_surf = pygame.transform.scale(self._agent_surf, (Screen.square_size, Screen.square_size))
         self._block_surf = pygame.transform.scale(self._block_surf, (Screen.square_size, Screen.square_size))
         self._goal_surf = pygame.transform.scale(self._goal_surf, (Screen.square_size, Screen.square_size))
@@ -50,15 +55,18 @@ class Game:
         self._display_surf.fill((30,30,30))
         self.maze.draw(self._display_surf, self._block_surf, self._goal_surf, my_agent.goal_point)
         self._display_surf.blit(self._agent_surf,(self._agent.point[0], self._agent.point[1]))
-
+        
         if my_agent:
-            self._display_surf.blit(self._trace_surf,(my_agent.start_point[1]*Screen.square_size, my_agent.start_point[0]*Screen.square_size))
-            for i in my_agent.finished_path:
-                self._display_surf.blit(self._trace_surf,(i[1]*Screen.square_size, i[0]*Screen.square_size))
-            self._display_surf.blit(self._agent_surf,(i[1]*Screen.square_size, i[0]*Screen.square_size))
-            
-        pygame.display.flip()
-
+            self._display_surf.blit(self._trace_surf[my_agent.finished_path[0][2]], (my_agent.start_point[1]*Screen.square_size, my_agent.start_point[0]*Screen.square_size))
+            for i in range(len(my_agent.finished_path)):
+                if i+1 < len(my_agent.finished_path): 
+                    temp = my_agent.finished_path[i+1]
+                    temp = temp[2]
+                    self._display_surf.blit(self._trace_surf[temp],(my_agent.finished_path[i][1]*Screen.square_size, my_agent.finished_path[i][0]*Screen.square_size))
+            self._display_surf.blit(self._agent_surf,(my_agent.finished_path[i][1]*Screen.square_size, my_agent.finished_path[i][0]*Screen.square_size))
+        
+        pygame.display.update()
+        
         fo = File_Operation()
         fo.OutputFile(my_matrix.matrix_map, my_agent.start_point, my_agent.goal_point, my_agent.finished_path)
     
