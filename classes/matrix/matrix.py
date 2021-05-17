@@ -154,3 +154,12 @@ class Matrix:
                 return True
             return False
         return False
+
+    def reset_matrix(self):
+        self.matrix_q.clear()
+        self.matrix_r.clear()
+        self.matrix_map.clear()
+
+        self.create_matrix()
+        self.fill_matrix_r_q()
+        self.fill_matrix_r()

@@ -40,7 +40,7 @@ class Game:
         self._search_surf = pygame.transform.scale(self._search_surf, (Screen.square_size, Screen.square_size))
  
     def on_event(self, event):
-        if event.type == QUIT:
+        if event.type == pygame.QUIT:
             self._running = False
  
     def on_loop(self):
@@ -76,7 +76,6 @@ class Game:
     def on_cleanup(self):
         Screen.reset_window_size()
         pygame.display.set_mode((Screen.window_width, Screen.window_height))
-        self._running = False
 
     def on_execute(self, my_agent, my_matrix):
         if self.on_init() == False:
@@ -100,7 +99,8 @@ class Game:
                     my_agent.step_count = 0
                     my_agent.total_q_value = 0
                     
-
+            for e in pygame.event.get():
+                self.on_event(e)
             pygame.event.pump()
             keys = pygame.key.get_pressed()
 

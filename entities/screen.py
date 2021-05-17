@@ -3,7 +3,7 @@ class Screen:
     matrix_x_y = [10, 10]
     agent_x_y = [0, 0]
     goal_x_y = [5, 5]
-    hurdle_rate = 1
+    hurdle_rate = 3
     learning_rate = 0.8
 
     square_size = 19
