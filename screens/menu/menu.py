@@ -6,6 +6,7 @@ from classes.matrix.matrix import Matrix
 from classes.agent.agent import Agent
 from screens.maze.maze import Maze
 from screens.game.game import Game
+from classes.validation.menu_validator import Menu_Validator
 
 class Menu:
     pygame.init()
@@ -17,6 +18,8 @@ class Menu:
         Screen.mode = value
 
     def start_the_game():
+        if Menu_Validator.control() == False:
+            return
         my_matrix = Matrix(Screen.matrix_x_y[0], Screen.matrix_x_y[1], Screen.agent_x_y, Screen.goal_x_y, Screen.hurdle_rate)
         my_agent = Agent(my_matrix.matrix_map, my_matrix.matrix_r,
                 my_matrix.matrix_q, Screen.learning_rate,
