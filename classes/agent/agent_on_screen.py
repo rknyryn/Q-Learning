@@ -4,10 +4,12 @@ from entities.screen import Screen
 class Agent_On_Screen:
     point = [0, 0]
 
+    # AJANIN BAŞLANGIÇ KONUMU ALIYOR
     def __init__(self, start) -> None:
         self.point[0] = start[0] * Screen.square_size
         self.point[1] = start[1] * Screen.square_size
 
+    # GELEN HAREKET YÖNÜ BİLGİSİNİ KONTROL EDİP İLGİLİ FONKSİYONU ÇALIŞTIRIYOR
     def move(self, direction):
         if direction == 0:
             self.move_up()

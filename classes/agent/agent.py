@@ -18,6 +18,7 @@ class Agent:
     step_count = 0
     total_q_value = 0
 
+    # MATRİSLERİ, ÖĞRENME KATSAYISINI, BAŞLANGIÇ VE HEDEF KONUMUNU ALIYOR
     def __init__(self, matrix_map, matrix_r, matrix_q, learning_rate, start_point, goal_point):
         self.matrix_map = matrix_map
         self.matrix_r = matrix_r
@@ -26,7 +27,8 @@ class Agent:
         self.start_point = start_point
         self.goal_point = goal_point
         self.current_location = start_point
-        
+    
+    # Q VE R TABLOSUNDAN AJANIN GİTTİĞİ YÖNDEKİ PUANINI HESAPLIYOR
     def calculate_value(self, agent_point, action, move_point, maximum):
         r_value = self.matrix_r[agent_point][action]
         if move_point >= 0 and move_point < maximum:
@@ -37,6 +39,7 @@ class Agent:
         self.total_q_value += r_value + q_value
         return r_value + q_value
 
+    # Q TABLOSUNDAN EN BÜYÜK DEĞERLİ OLAN YÖNÜ SEÇİYOR. EĞER AYNI DEĞERDE 1'DEN FAZLA YÖN VARSA ARALARINDAN RASTGELE SEÇİM YAPIYOR
     def choose_action(self, agent_point):
         max_value = max(self.matrix_q[agent_point])
         same_index = []
@@ -45,6 +48,7 @@ class Agent:
                 same_index.append(i)
         return choice(same_index)
 
+    # SEÇİLEN YÖNE GÖRE AJANIN HANGİ KONUMDA OLACAĞINI GERİ DÖNDÜRÜYOR
     def move_point(self, action):
         if action == 0:
             return [self.current_location[0]-1, self.current_location[1], 0]
@@ -64,6 +68,7 @@ class Agent:
             return [self.current_location[0]-1, self.current_location[1]-1, 7]
         return
 
+    # AJANIN HAREKETİNİ KONTROL EDİYOR. EĞER HEDEFE ULAŞTIYSA VEYA ENGELE ÇARPTIYSA İLGİLİ İŞLEMLERİ GERÇEKLEŞTİRİYOR.
     def move_agent(self, move_point):
         if self.matrix_map[move_point[0]][move_point[1]] == 100:
             Statistics.add(self.total_q_value,self.step_count + 1)
@@ -85,10 +90,11 @@ class Agent:
             self.path.append(move_point)
             self.set_agent_point(move_point)
 
-
+    # AJANIN MATRİS ÜZERİNDEKİ KONUMUNU DEĞİŞTİRİYOR
     def set_agent_point(self, move_point):
         self.current_location = move_point
 
+    # HEDEFE ULAŞMA DURUMUNU KONTROL EDİYOR. EĞER HESAPLANAN DEĞER SAYISI KADAR HEDEFE ULAŞTIYSA ARAMA İŞLEMİNİ BİTİRMEK İÇİN FALSE DÖNDÜRÜYOR
     def goal_control(self):
         if self.goal_path_count >= (len(self.matrix_map[0]) * len(self.matrix_map))/2:
             return False
