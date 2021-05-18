@@ -33,11 +33,11 @@ Aşağıdaki örnek Q-learning algoritmasını çalışmasını kısaca açıkla
 1’de 6 durumdan oluşan bir ortam verilmistir.Durumlar arası geçişler de oklar ile
 göstermektedir.
 
-<img>
+<img src=https://github.com/rknyryn/Q-Learning/blob/main/images/figure1.png>
 
 Buna göre R matrisi ve Q matrisinin ilk hali aşağıdaki gibi olur.
 
-<img>
+<img src=https://github.com/rknyryn/Q-Learning/blob/main/images/r-q-matrix.png>
 
 ## Kurulum
 ```
