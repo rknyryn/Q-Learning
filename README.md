@@ -1,4 +1,4 @@
-# Q-Learning
+# Q-Learning ile Yol Planlaması
 
 Pekiştirmeli öğrenme (reinforcement learning), öznelerin (agent) bir görevi en yüksek
 kazançla tamamlayabilmek için hangi eylemleri gerçekleştirmeleri gerektigi ile
